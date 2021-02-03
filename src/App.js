@@ -1,6 +1,21 @@
 import React from 'react'
 import logo from './logo.svg';
 import './App.css';
+import axios from 'axios';
+
+
+const createNewCategory = (category_name) => {
+  // const request_url = "http://127.0.0.1:8080/categories/new";
+  const request_url = "http://127.0.0.1:8080";
+  axios.get(request_url, {
+      withCredentials: true
+  })
+  .then((res) => {
+    console.log(res.data);
+  }, (err) => {
+    console.error(err);
+  });
+}
 
 function App() {
   const [category_name, setCategoryName] = React.useState('');
@@ -10,6 +25,7 @@ function App() {
   }
 
   const onSubmit = (event) => {
+    createNewCategory(category_name);
   }
 
   return (
