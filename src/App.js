@@ -2,14 +2,19 @@ import React from 'react'
 import logo from './logo.svg';
 import './App.css';
 import axios from 'axios';
+// import { URLSearchParams } from 'url';
 
+
+axios.defaults.withCredentials = true;
+axios.defaults.baseURL = 'http://localhost:3000';
+axios.defaults.headers.post['Content-Type'] = '*';
+axios.defaults.headers.post['Access-Control-Allow-Origin'] = 'application/json;charset=utf-8';
 
 const createNewCategory = (category_name) => {
-  // const request_url = "http://127.0.0.1:8080/categories/new";
-  const request_url = "http://127.0.0.1:8080";
-  axios.get(request_url, {
-      withCredentials: true
-  })
+  const request_url = "http://127.0.0.1:8080/categories/new";
+  let params = new URLSearchParams();
+  params.append('name', category_name)
+  axios.post(request_url, params)
   .then((res) => {
     console.log(res.data);
   }, (err) => {
