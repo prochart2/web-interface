@@ -22,6 +22,16 @@ const createNewCategory = (category_name) => {
   });
 }
 
+const pullExistingCategories = () => {
+  const request_url = "http://127.0.0.1:8080/categories";
+  axios.get(request_url)
+  .then(res => {
+    console.log(res.data)
+  }, (err) => {
+    console.error(err);
+  })
+}
+
 function App() {
   const [category_name, setCategoryName] = React.useState('');
 
@@ -33,6 +43,9 @@ function App() {
     createNewCategory(category_name);
   }
 
+  const onTestButtonPressed= (event) => {
+    pullExistingCategories();
+  }
   return (
     <div className="App">
       <header className="App-header">
@@ -50,6 +63,7 @@ function App() {
         </a>
         <textarea onChange={onTextAreaChange} />
         <button onClick={onSubmit}>Add Category</button>
+        <button onClick={onTestButtonPressed}>Pull Category</button>
       </header>
     </div>
   );
