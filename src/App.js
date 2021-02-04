@@ -45,10 +45,7 @@ function App() {
     createNewCategory(category_name);
   }
 
-  const onTestButtonPressed= (event) => {
-    pullExistingCategories(setCategoryList);
-  }
-
+  pullExistingCategories(setCategoryList);
   const categoryOptions = categoryList.map(({id, name}) => {
     return <option key={id} value={id}>{name}</option>;
   });
@@ -70,7 +67,6 @@ function App() {
         </a>
         <textarea onChange={onTextAreaChange} />
         <button onClick={onSubmit}>Add Category</button>
-        <button onClick={onTestButtonPressed}>Pull Category</button>
         <select name="categories">
           { categoryOptions }
         </select>
