@@ -51,7 +51,7 @@ function App() {
           Learn React
         </a>
         <textarea value={categoryName} onChange={onTextAreaChange} />
-        <button onClick={onSubmit}>Add Category</button>
+        <button onClick={onSubmit} disabled={categoryName === ''}>Add Category</button>
         <CategorySelector />
       </header>
     </div>
