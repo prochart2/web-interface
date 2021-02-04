@@ -4,8 +4,8 @@ import axios from 'axios';
 
 
 const pullCategories = setCategoryList => {
-  const request_url = "http://localhost:8080/categories";
-  axios.get(request_url)
+  const requestUrl = "http://localhost:8080/categories";
+  axios.get(requestUrl)
   .then(res => {
     setCategoryList(res.data);
   }, err => {
