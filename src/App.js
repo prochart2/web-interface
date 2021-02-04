@@ -22,11 +22,12 @@ const createNewCategory = (category_name) => {
   });
 }
 
-const pullExistingCategories = () => {
+const pullExistingCategories = (setCategoryList) => {
   const request_url = "http://127.0.0.1:8080/categories";
   axios.get(request_url)
   .then(res => {
-    console.log(res.data)
+    console.log(res.data);
+    setCategoryList(res.data);
   }, (err) => {
     console.error(err);
   })
@@ -34,6 +35,7 @@ const pullExistingCategories = () => {
 
 function App() {
   const [category_name, setCategoryName] = React.useState('');
+  const [categoryList, setCategoryList] = React.useState([]);
 
   const onTextAreaChange = (event) => {
     setCategoryName(event.target.value);
@@ -44,8 +46,13 @@ function App() {
   }
 
   const onTestButtonPressed= (event) => {
-    pullExistingCategories();
+    pullExistingCategories(setCategoryList);
   }
+
+  const categoryOptions = categoryList.map(({id, name}) => {
+    return <option key={id} value={id}>{name}</option>;
+  });
+
   return (
     <div className="App">
       <header className="App-header">
@@ -64,6 +71,9 @@ function App() {
         <textarea onChange={onTextAreaChange} />
         <button onClick={onSubmit}>Add Category</button>
         <button onClick={onTestButtonPressed}>Pull Category</button>
+        <select name="categories">
+          { categoryOptions }
+        </select>
       </header>
     </div>
   );
