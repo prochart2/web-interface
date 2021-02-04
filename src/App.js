@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import axios from 'axios';
 // import { URLSearchParams } from 'url';
+import CategorySelector from './components/CategorySelector'
 
 
 axios.defaults.withCredentials = true;
@@ -22,20 +23,8 @@ const createNewCategory = (category_name) => {
   });
 }
 
-const pullExistingCategories = (setCategoryList) => {
-  const request_url = "http://127.0.0.1:8080/categories";
-  axios.get(request_url)
-  .then(res => {
-    console.log(res.data);
-    setCategoryList(res.data);
-  }, (err) => {
-    console.error(err);
-  })
-}
-
 function App() {
   const [category_name, setCategoryName] = React.useState('');
-  const [categoryList, setCategoryList] = React.useState([]);
 
   const onTextAreaChange = (event) => {
     setCategoryName(event.target.value);
@@ -44,11 +33,6 @@ function App() {
   const onSubmit = (event) => {
     createNewCategory(category_name);
   }
-
-  pullExistingCategories(setCategoryList);
-  const categoryOptions = categoryList.map(({id, name}) => {
-    return <option key={id} value={id}>{name}</option>;
-  });
 
   return (
     <div className="App">
@@ -67,9 +51,7 @@ function App() {
         </a>
         <textarea onChange={onTextAreaChange} />
         <button onClick={onSubmit}>Add Category</button>
-        <select name="categories">
-          { categoryOptions }
-        </select>
+        <CategorySelector />
       </header>
     </div>
   );
