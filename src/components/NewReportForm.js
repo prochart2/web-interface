@@ -4,6 +4,21 @@ import axios from 'axios';
 import CategorySelector from './CategorySelector'
 
 
+const createNewReport = (comment, date, categoryId) => {
+  const requestUrl = "http://localhost:8080/reports/new";
+  let params = new URLSearchParams();
+  params.append('comment', comment);
+  params.append('date', date);
+  params.append('category_id', categoryId);
+  console.log(comment, date, categoryId);
+  axios.post(requestUrl, params)
+    .then(res => {
+      console.log(res.data);
+    }, err => {
+      console.error(err);
+    })
+}
+
 const NewReportForm = () => {
   const [comment, setComment] = React.useState('');
   const [category, setCategory] = React.useState(0);
