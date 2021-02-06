@@ -1,8 +1,8 @@
 import React from 'react'
 import './App.css';
 import axios from 'axios';
-import CategorySelector from './components/CategorySelector'
 import NewCategoryForm from './components/NewCategoryForm'
+import NewReportForm from './components/NewReportForm'
 
 
 axios.defaults.withCredentials = true;
@@ -14,8 +14,8 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
+        <NewReportForm />
         <NewCategoryForm />
-        <CategorySelector />
       </header>
     </div>
   );
