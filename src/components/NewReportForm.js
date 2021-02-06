@@ -7,6 +7,7 @@ import CategorySelector from './CategorySelector'
 const NewReportForm = () => {
   const [comment, setComment] = React.useState('');
   const [category, setCategory] = React.useState(0);
+  const [date, setDate] = React.useState('');
 
   const onCommentChanged = (event) => {
     setComment(event.target.value);
@@ -14,12 +15,18 @@ const NewReportForm = () => {
   const onCategoryChanged = (event) => {
     setCategory(event.target.value);
   }
+  const onDateChanged = (event) => {
+    setDate(event.target.value);
+  }
   const onSubmit = (event) => {
+    createNewReport(comment, date, category);
+    setComment('');
   }
 
   return (
     <div>
       <textarea onChange={onCommentChanged} />
+      <input type="date" onChange={onDateChanged} />
       <CategorySelector onChange={onCategoryChanged} />
       <button onClick={onSubmit}>Add Report</button>
     </div>
