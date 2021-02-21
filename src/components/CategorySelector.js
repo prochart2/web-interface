@@ -13,8 +13,7 @@ const pullCategories = setCategoryList => {
   });
 }
 
-// init は最初のロードのみ実行するための引数
-const CategorySelector = ({ init } = { init: true })=> {
+const CategorySelector = (props)=> {
   const [CategoryList, setCategoryList] = React.useState([]);
 
   const categoryOptions = CategoryList.map(({id, name}) => {
@@ -22,10 +21,10 @@ const CategorySelector = ({ init } = { init: true })=> {
   });
   React.useEffect(() => {
     pullCategories(setCategoryList);
-  }, [init]);
+  }, [props.init]);  // FIXME: 1回のみの実行
 
   return (
-    <select name="categories">
+    <select name="categories" onChange={props.onChange}>
       { categoryOptions }
     </select>
   )
