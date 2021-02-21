@@ -23,7 +23,7 @@ const createNewReport = (comment, date, categoryId) => {
 const NewReportForm = () => {
   const [comment, setComment] = React.useState('');
   const [category, setCategory] = React.useState('1');
-  const [date, setDate] = React.useState('');
+  const [date, setDate] = React.useState(new Date().toISOString().slice(0, 10));
 
   const onCommentChanged = (event) => {
     setComment(event.target.value);
@@ -42,7 +42,7 @@ const NewReportForm = () => {
   return (
     <div>
       <textarea onChange={onCommentChanged} />
-      <input type="date" onChange={onDateChanged} />
+      <input type="date" value={date} onChange={onDateChanged} />
       <CategorySelector onChange={onCategoryChanged} />
       <button onClick={onSubmit}>Add Report</button>
     </div>
